@@ -31,9 +31,23 @@ var app = require('express')();
 app.use(mongodb());
 ```
 
-### Common options
-
  * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
  * `db` - name of database (default: `test`)
  * `readPreference` - readPreference of MongoDB (default: `secondaryPreferred`, more [values here](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference))
- * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference) with configured `readPreference` inside.
+ * `retries` - number of retires of connection to cluster or within cluser
+ * `reconnectWait` - time between retries in milliseconds
+ * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference) with configured `readPreference`, `retries`, `reconnectWait`, `numberOfRetries`, and `retryMiliSeconds` inside.
+
+## Reconnecting event
+
+To know what's up in your life, we provide event-emitter to listen to. For example - this is how you know, that reconnecton happening:
+
+```javascript
+var mongodb = require('express-mongo-db');
+mongodb.connection.on('reconnect', function(err) {
+    console.log("Reconnecting to mongo (" + this.retries + " retries left). " + (err.stack ? err.stack : err));
+});
+
+var app = require('express')();
+app.use(mongodb());
+```
