@@ -11,7 +11,8 @@ describe('connection', function () {
 
     it('should throw error on connection problems', function (done) {
         var middleware = mongodb({
-            host: 'undefined'
+            host: 'undefined',
+            retries: 1
         });
 
         middleware(req, {}, function (err) {
