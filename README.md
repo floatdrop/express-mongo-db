@@ -34,8 +34,8 @@ app.use(mongodb());
  * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
  * `db` - name of database (default: `test`)
  * `readPreference` - readPreference of MongoDB (default: `secondaryPreferred`, more [values here](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference))
- * `retries` - number of retires of connection to cluster or within cluser
- * `reconnectWait` - time between retries in milliseconds
+ * `retries` - number of retires of connection to cluster or within cluser (default: `60`)
+ * `reconnectWait` - time between retries in milliseconds (default: `1000`)
  * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference) with configured `readPreference`, `retries`, `reconnectWait`, `numberOfRetries`, and `retryMiliSeconds` inside.
 
 ## Events
