@@ -57,3 +57,5 @@ mongodb.connection.once('available', function(err, db) {
     
 });
 ```
+
+`express-mongo-db` will start attempts to connect straight after require.
