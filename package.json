@@ -1,0 +1,34 @@
+{
+  "name": "express-mongodb",
+  "version": "0.0.0",
+  "description": "Mongodb connection middleware for express",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha --report lcovonly -- test/*.js --reporter list --timeout 100000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.yandex-team.ru/floatdrop/express-mongodb"
+  },
+  "dependencies": {
+    "mocha": "~1.15.1",
+    "sinon": "~1.7.3",
+    "coveralls": "~2.6.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "istanbul": "~0.1.44",
+    "mongodb": "~1.3.23",
+    "lodash": "~2.4.1",
+    "events": "~1.0.0"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "middleware"
+  ],
+  "author": "Vsevolod Strukchinsky",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "~3.4.7",
+    "supertest": "~0.8.2"
+  }
+}
