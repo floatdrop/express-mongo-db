@@ -1,6 +1,6 @@
 {
   "name": "express-mongo-db",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Mongodb connection middleware for express",
   "main": "lib/index.js",
   "scripts": {
