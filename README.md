@@ -38,7 +38,7 @@ app.use(mongodb());
  * `reconnectWait` - time between retries in milliseconds
  * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference) with configured `readPreference`, `retries`, `reconnectWait`, `numberOfRetries`, and `retryMiliSeconds` inside.
 
-## Reconnecting event
+## Events
 
 To know what's up in your life, we provide event-emitter to listen to. For example - this is how you know, that reconnecton happening:
 
@@ -47,7 +47,13 @@ var mongodb = require('express-mongo-db');
 mongodb.connection.on('reconnect', function(err) {
     console.log("Reconnecting to mongo (" + this.retries + " retries left). " + (err.stack ? err.stack : err));
 });
+```
 
-var app = require('express')();
-app.use(mongodb());
+Also you can subscribe on connection event:
+
+```javascript
+var mongodb = require('express-mongo-db');
+mongodb.connection.once('available', function(err, db) {
+    
+});
 ```
