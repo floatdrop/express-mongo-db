@@ -29,6 +29,11 @@ mongodb.config.readPreference = 'secondary';
 
 var app = require('express')();
 app.use(mongodb());
+
+app.get('/', function(req, res) {
+    req.db.find(/* ... */);
+});
+
 ```
 
  * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
