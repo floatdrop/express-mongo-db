@@ -8,7 +8,7 @@ var defaults = _.partialRight(_.assign, function (a, b) {
 });
 
 var config = {
-    host: 'localhost:27017',
+    host: '127.0.0.1:27017',
     db: 'test',
     readPreference: 'secondaryPreferred',
     retries: 60,
