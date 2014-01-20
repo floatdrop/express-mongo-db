@@ -1,4 +1,5 @@
-# express-mongo-db
+# connect-once [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+> Connect once and memorize connection for next usages
 
 Middleware that netowork-flaps and shit aware.
 
@@ -6,7 +7,7 @@ Middleware that netowork-flaps and shit aware.
 
 First - install middleware in project:
 
-```npm i express-mongodb --save```
+```npm i express-mongo-db --save```
 
 Second - add middleware to express application:
 
@@ -58,9 +59,21 @@ Also you can subscribe on connection event:
 
 ```javascript
 var mongodb = require('express-mongo-db')(options);
-mongodb.connection.once('available', function(err, db) {
+mongodb.connection.when('available', function(err, db) {
     
 });
 ```
 
 `express-mongo-db` will start attempts to connect straight after require.
+
+[npm-url]: https://npmjs.org/package/express-mongo-db
+[npm-image]: https://badge.fury.io/js/express-mongo-db.png
+
+[travis-url]: http://travis-ci.org/floatdrop/express-mongo-db
+[travis-image]: https://travis-ci.org/floatdrop/express-mongo-db.png?branch=master
+
+[coveralls-url]: https://coveralls.io/r/floatdrop/express-mongo-db
+[coveralls-image]: https://coveralls.io/repos/floatdrop/express-mongo-db/badge.png
+
+[depstat-url]: https://david-dm.org/floatdrop/express-mongo-db
+[depstat-image]: https://david-dm.org/floatdrop/express-mongo-db.png?theme=shields.io

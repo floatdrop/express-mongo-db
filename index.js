@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    connectOnce = require('connect-once');
 
 var defaults = _.partialRight(_.assign, function (a, b) {
     return typeof a === 'undefined' ? b : a;
@@ -37,12 +38,15 @@ module.exports = function (options) {
     options.options.replSet.reconnectWait = options.options.replSet.reconnectWait || options.reconnectWait;
     options.options.replSet.readPreference = options.options.replSet.readPreference || options.readPreference;
 
-    var connect = MongoClient.connect.bind(MongoClient,
+    var connection = new connectOnce(
+        {
+            retries: options.retries,
+            reconnectWait: options.reconnectWait
+        },
+        MongoClient.connect,
         'mongodb://' + options.host + '/' + options.db + '?',
         options.options
     );
-
-    var connection = new (require('./connection'))(connect, options);
 
     var f = function (req, res, next) {
         connection.when('available', function (err, db) {
@@ -53,9 +57,9 @@ module.exports = function (options) {
             next();
         });
     };
-    
+
     f.connection = connection;
-    
+
     return f;
 };
 
