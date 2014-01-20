@@ -9,7 +9,8 @@ describe('connection', function () {
     it('should connect pass error on fail', function (done) {
         var middleware = mongodb({
             host: 'undefined',
-            retries: 1
+            retries: 1,
+            reconnectTimeout: 1
         });
 
         middleware({}, {}, function (err) {
