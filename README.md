@@ -48,7 +48,7 @@ app.get('/', function(req, res) {
 To know what's up in your life, we provide event-emitter to listen to. For example - this is how you know, that reconnecton happening:
 
 ```javascript
-var mongodb = require('express-mongo-db');
+var mongodb = require('express-mongo-db')(options);
 mongodb.connection.on('reconnect', function(err) {
     console.log("Reconnecting to mongo (" + this.retries + " retries left). " + (err.stack ? err.stack : err));
 });
@@ -57,7 +57,7 @@ mongodb.connection.on('reconnect', function(err) {
 Also you can subscribe on connection event:
 
 ```javascript
-var mongodb = require('express-mongo-db');
+var mongodb = require('express-mongo-db')(options);
 mongodb.connection.once('available', function(err, db) {
     
 });
