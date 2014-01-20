@@ -1,31 +1,29 @@
-/*global describe, before, beforeEach, after, afterEach, it */
-var _ = require('lodash');
-var assert = require('assert');
-// var sinon = require('sinon');
+/* global describe, it */
+/* jshint expr:true */
+'use strict';
 
-var mongodb = require('../lib');
-mongodb.config.logger = null;
+var mongodb = require('..');
+var should = require('should');
 
 describe('connection', function () {
-    var req = {};
-
-    it('should throw error on connection problems', function (done) {
+    it('should connect pass error on fail', function (done) {
         var middleware = mongodb({
             host: 'undefined',
             retries: 1
         });
 
-        middleware(req, {}, function (err) {
-            assert.ok(err !== undefined, 'Middelware not pass error');
+        middleware({}, {}, function (err) {
+            should(err).is.ok;
             done();
-        })
+        });
     });
 
     it('should connect to mongodb', function (done) {
         var middleware = mongodb();
+        var req = {};
         middleware(req, {}, function (err) {
-            assert.ok(req.db, 'Connection to database is undefined');
+            should(req.db).is.ok;
             done(err);
-        })
+        });
     });
 });
