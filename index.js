@@ -44,7 +44,7 @@ module.exports = function (options) {
             reconnectWait: options.reconnectWait
         },
         MongoClient.connect,
-        'mongodb://' + options.host + '/' + options.db + '?',
+        'mongodb://' + options.host + '/' + options.db,
         options.options
     );
 
