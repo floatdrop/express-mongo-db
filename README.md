@@ -40,9 +40,9 @@ app.get('/', function(req, res) {
 
  * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
  * `db` - name of database (default: `test`)
- * `retries` - number of retires of connection to cluster or within cluser (default: `60`)
- * `reconnectWait` - time between retries in milliseconds (default: `1000`)
  * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
+ * And all options from [connect-once](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
+
 
 ## Events
 

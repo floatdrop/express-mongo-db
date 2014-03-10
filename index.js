@@ -21,10 +21,7 @@ module.exports = function (options) {
     options = defaults({}, options, config);
 
     var connection = new connectOnce(
-        {
-            retries: options.retries,
-            reconnectWait: options.reconnectWait
-        },
+        options,
         MongoClient.connect,
         'mongodb://' + options.host + '/' + options.db,
         options.options
