@@ -40,6 +40,7 @@ app.get('/', function(req, res) {
 
  * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
  * `db` - name of database (default: `test`)
+ * `mongodb` - MongoDB library, useful for promisifying (default: `requrie('mongodb')`)
  * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
  * And all options from [connect-once](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
 
@@ -60,7 +61,7 @@ Also you can subscribe on connection event:
 ```javascript
 var mongodb = require('express-mongo-db')(options);
 mongodb.connection.when('available', function(err, db) {
-    
+
 });
 ```
 

@@ -12,14 +12,14 @@ var config = {
     db: 'test',
     retries: 60,
     reconnectWait: 1000,
+    mongodb: require('mongodb'),
     options: {}
 };
 
 module.exports = function (options) {
-    var MongoClient = require('mongodb').MongoClient;
-
     options = defaults({}, options, config);
 
+    var MongoClient = options.mongodb.MongoClient;
     var connection = new connectOnce(
         options,
         MongoClient.connect,
