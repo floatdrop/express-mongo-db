@@ -12,15 +12,14 @@
     "url": "http://github.com/floatdrop/express-mongo-db"
   },
   "dependencies": {
-    "mongodb": "~1.4",
-    "connect-once": "~0.1.0",
-    "lodash": "~2.4.1"
+    "connect-once": "~0.1.0"
   },
   "devDependencies": {
-    "mocha": "~1.15.1",
     "coveralls": "~2.6.0",
-    "mocha-lcov-reporter": "0.0.1",
     "istanbul": "~0.1.44",
+    "mocha": "~1.15.1",
+    "mocha-lcov-reporter": "0.0.1",
+    "mongodb": "^1.4.7",
     "should": "~3.0.1"
   },
   "keywords": [

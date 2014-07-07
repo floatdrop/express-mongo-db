@@ -7,7 +7,7 @@ var should = require('should');
 
 describe('connection', function () {
     it('should connect pass error on fail', function (done) {
-        var middleware = mongodb({
+        var middleware = mongodb(require('mongodb'), {
             host: 'undefined',
             retries: 1,
             reconnectTimeout: 1
@@ -20,7 +20,7 @@ describe('connection', function () {
     });
 
     it('should connect to mongodb', function (done) {
-        var middleware = mongodb();
+        var middleware = mongodb(require('mongodb'));
         var req = {};
         middleware(req, {}, function (err) {
             should(req.db).is.ok;

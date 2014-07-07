@@ -1,25 +1,18 @@
 'use strict';
 
-var _ = require('lodash'),
-    connectOnce = require('connect-once');
+var connectOnce = require('connect-once');
 
-var defaults = _.partialRight(_.assign, function (a, b) {
-    return typeof a === 'undefined' ? b : a;
-});
+module.exports = function (mongodb, options) {
+    options = options || {};
+    options = {
+        host: options.host || '127.0.0.1:27017',
+        db: options.db || 'test',
+        retries: options.retries || 60,
+        reconnectWait: options.reconnectWait || 1000,
+        options: options.options
+    };
 
-var config = {
-    host: '127.0.0.1:27017',
-    db: 'test',
-    retries: 60,
-    reconnectWait: 1000,
-    mongodb: require('mongodb'),
-    options: {}
-};
-
-module.exports = function (options) {
-    options = defaults({}, options, config);
-
-    var MongoClient = options.mongodb.MongoClient;
+    var MongoClient = mongodb.MongoClient;
     var connection = new connectOnce(
         options,
         MongoClient.connect,
@@ -41,5 +34,3 @@ module.exports = function (options) {
 
     return f;
 };
-
-module.exports.config = config;

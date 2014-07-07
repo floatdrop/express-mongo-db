@@ -8,16 +8,22 @@ Middleware that netowork-flaps and shit aware.
 
 First - install middleware in project:
 
-```npm i express-mongo-db --save```
+```npm i express-mongo-db mongodb --save```
 
 Second - add middleware to express application:
 
 ```javascript
 var app = require('express')();
-app.use(require('express-mongo-db')());
+app.use(require('express-mongo-db')(require('mongodb')));
 ```
 
 Now you got `req.db` object of Mongodb database in every request handler.
+
+## API
+
+#### express-mongo-db(mongodb, [options])
+
+Creates middleware with passed mongodb module instance (this is useful for promisification).
 
 ## Options
 
@@ -30,7 +36,7 @@ var mongodb = require('express-mongo-db');
 mongodb.config.readPreference = 'secondary';
 
 var app = require('express')();
-app.use(mongodb());
+app.use(mongodb(require('mongodb')));
 
 app.get('/', function(req, res) {
     req.db.find(/* ... */);
@@ -40,7 +46,6 @@ app.get('/', function(req, res) {
 
  * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
  * `db` - name of database (default: `test`)
- * `mongodb` - MongoDB library, useful for promisifying (default: `requrie('mongodb')`)
  * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
  * And all options from [connect-once](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
 
@@ -50,7 +55,7 @@ app.get('/', function(req, res) {
 To know what's up in your life, we provide event-emitter to listen to. For example - this is how you know, that reconnecton happening:
 
 ```javascript
-var mongodb = require('express-mongo-db')(options);
+var mongodb = require('express-mongo-db')(require('mongodb'), options);
 mongodb.connection.on('reconnect', function(err) {
     console.log("Reconnecting to mongo (" + this.retries + " retries left). " + (err.stack ? err.stack : err));
 });
@@ -59,7 +64,7 @@ mongodb.connection.on('reconnect', function(err) {
 Also you can subscribe on connection event:
 
 ```javascript
-var mongodb = require('express-mongo-db')(options);
+var mongodb = require('express-mongo-db')(require('mongodb'), options);
 mongodb.connection.when('available', function(err, db) {
 
 });
