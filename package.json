@@ -19,7 +19,7 @@
     "istanbul": "~0.1.44",
     "mocha": "~1.15.1",
     "mocha-lcov-reporter": "0.0.1",
-    "mongodb": "^1.4.7",
+    "mongodb": "~1.4.7",
     "should": "~3.0.1"
   },
   "keywords": [
