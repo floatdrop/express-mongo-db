@@ -1,8 +1,7 @@
 # express-mongo-db
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
-> Connect once and memorize connection for next usages
 
-Middleware that netowork-flaps and shit aware.
+Middleware that creates __only one__ connection, that initialized before first request is recieved and shares it for all next incoming requests.
 
 ## Usage
 
