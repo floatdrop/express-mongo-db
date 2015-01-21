@@ -27,11 +27,16 @@ Creates middleware with passed mongodb module instance (this is useful for promi
 
 You can pass options to constructor of middleware function like this: `require('express-mongo-db')(options)` where `options` is an object with fields described below.
 
-Also you can modify defaults value in `config` property of middleware contructor like this:
+ * All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node)
+ * All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function
+ * `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference)
 
 ```javascript
-var mongodb = require('express-mongo-db');
-mongodb.config.readPreference = 'secondary';
+var mongodb = require('express-mongo-db')({
+    hosts: [{host: 'localhost', port: 31337}],
+    username: 'root',
+    password: 'wat'
+});
 
 var app = require('express')();
 app.use(mongodb(require('mongodb')));
@@ -39,12 +44,7 @@ app.use(mongodb(require('mongodb')));
 app.get('/', function(req, res) {
     req.db.find(/* ... */);
 });
-
 ```
-
- * All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node) plus:
- * All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
- * `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
 
 ## Events
 
