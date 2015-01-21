@@ -17,10 +17,7 @@ module.exports = function (mongodb, options) {
 
     var MongoClient = mongodb.MongoClient;
     var connection = new connectOnce(
-        {
-            retries: options.retries || 60,
-            reconnectWait: options.reconnectWait || 1000
-        },
+        options,
         MongoClient.connect,
         mongodbUri.format(uri),
         options.mongoClient
