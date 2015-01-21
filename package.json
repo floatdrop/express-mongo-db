@@ -12,7 +12,8 @@
     "url": "http://github.com/floatdrop/express-mongo-db"
   },
   "dependencies": {
-    "connect-once": "~0.1.0"
+    "connect-once": "~0.1.0",
+    "mongodb-uri": "^0.9.7"
   },
   "devDependencies": {
     "coveralls": "~2.6.0",

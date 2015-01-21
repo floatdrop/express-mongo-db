@@ -43,11 +43,9 @@ app.get('/', function(req, res) {
 
 ```
 
- * `host` - server or replica string (default: `localhost`, but can be `server.one.com:123,server.two.com:456`)
- * `db` - name of database (default: `test`)
- * `options` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
- * And all options from [connect-once](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
-
+All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node) plus:
+All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
+And `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
 
 ## Events
 

@@ -1,23 +1,29 @@
 'use strict';
 
 var connectOnce = require('connect-once');
+var mongodbUri  = require('mongodb-uri');
 
 module.exports = function (mongodb, options) {
     options = options || {};
-    options = {
-        host: options.host || '127.0.0.1:27017',
-        db: options.db || 'test',
-        retries: options.retries || 60,
-        reconnectWait: options.reconnectWait || 1000,
+
+    var uri = {
+        hosts: options.hosts || [{ host: '127.0.0.1', port: 27017}],
+        database: options.database || 'test',
+        scheme: options.scheme,
+        username: options.username,
+        password: options.password,
         options: options.options
     };
 
     var MongoClient = mongodb.MongoClient;
     var connection = new connectOnce(
-        options,
+        {
+            retries: options.retries || 60,
+            reconnectWait: options.reconnectWait || 1000
+        },
         MongoClient.connect,
-        'mongodb://' + options.host + '/' + options.db,
-        options.options
+        mongodbUri.format(uri),
+        options.mongoClient
     );
 
     var f = function (req, res, next) {

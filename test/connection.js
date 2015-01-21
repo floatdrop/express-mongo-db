@@ -8,7 +8,7 @@ var should = require('should');
 describe('connection', function () {
     it('should connect pass error on fail', function (done) {
         var middleware = mongodb(require('mongodb'), {
-            host: 'undefined',
+            hosts: [{hostname: 'undefined'}],
             retries: 1,
             reconnectTimeout: 1
         });
