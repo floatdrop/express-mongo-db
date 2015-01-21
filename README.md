@@ -1,5 +1,4 @@
-# express-mongo-db
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+# express-mongo-db [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 Middleware that creates __only one__ connection, that initialized before first request is recieved and shares it for all next incoming requests.
 
@@ -69,14 +68,8 @@ mongodb.connection.when('available', function(err, db) {
 
 `express-mongo-db` will start attempts to connect straight after require.
 
-[npm-url]: https://npmjs.org/package/express-mongo-db
-[npm-image]: https://badge.fury.io/js/express-mongo-db.png
-
 [travis-url]: http://travis-ci.org/floatdrop/express-mongo-db
-[travis-image]: https://travis-ci.org/floatdrop/express-mongo-db.png?branch=master
+[travis-image]: https://travis-ci.org/floatdrop/express-mongo-db.svg?branch=master&style=flat
 
 [coveralls-url]: https://coveralls.io/r/floatdrop/express-mongo-db
-[coveralls-image]: https://coveralls.io/repos/floatdrop/express-mongo-db/badge.png
-
-[depstat-url]: https://david-dm.org/floatdrop/express-mongo-db
-[depstat-image]: https://david-dm.org/floatdrop/express-mongo-db.png?theme=shields.io
+[coveralls-image]: https://coveralls.io/repos/floatdrop/express-mongo-db/badge.svg?style=flat
