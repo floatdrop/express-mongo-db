@@ -43,9 +43,9 @@ app.get('/', function(req, res) {
 
 ```
 
-All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node) plus:
-All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
-And `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
+ * All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node) plus:
+ * All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function.
+ * `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference).
 
 ## Events
 
