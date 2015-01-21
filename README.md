@@ -32,17 +32,17 @@ Creates middleware with passed mongodb module instance (this is useful for promi
 For example:
 
 ```javascript
-var mongodb = require('express-mongo-db')({
+var mongodb = require('express-mongo-db');
+
+var app = require('express')();
+app.use(mongodb(require('mongodb'), {
     hosts: [{host: 'localhost', port: 31337}],
     username: 'root',
     password: 'wat',
     mongoClient: {
         slaveOk: true
     }
-});
-
-var app = require('express')();
-app.use(mongodb(require('mongodb')));
+}));
 
 app.get('/', function(req, res) {
     req.db.find(/* ... */);
