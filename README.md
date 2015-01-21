@@ -25,17 +25,20 @@ Creates middleware with passed mongodb module instance (this is useful for promi
 
 ## Options
 
-You can pass options to constructor of middleware function like this: `require('express-mongo-db')(options)` where `options` is an object with fields described below.
-
  * All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node)
  * All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function
  * `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference)
+
+For example:
 
 ```javascript
 var mongodb = require('express-mongo-db')({
     hosts: [{host: 'localhost', port: 31337}],
     username: 'root',
-    password: 'wat'
+    password: 'wat',
+    mongoClient: {
+        slaveOk: true
+    }
 });
 
 var app = require('express')();
