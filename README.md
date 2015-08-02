@@ -1,78 +1,47 @@
-# express-mongo-db [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+# express-mongo-db [![Build Status](https://travis-ci.org/floatdrop/express-mongo-db.svg?branch=master)](https://travis-ci.org/floatdrop/express-mongo-db)
 
-Middleware that creates __only one__ connection, that initialized before first request is recieved and shares it for all next incoming requests.
+> Get db connection in request
+
+
+## Install
+
+```
+$ npm install --save express-mongo-db
+```
+
 
 ## Usage
 
-First - install middleware in project:
+```js
+var expressMongoDb = require('express-mongo-db');
 
-```npm i express-mongo-db mongodb --save```
-
-Second - add middleware to express application:
-
-```javascript
-var app = require('express')();
-app.use(require('express-mongo-db')(require('mongodb')));
+app.use(expressMongoDb('mongodb://localhost/test'));
 ```
 
-Now you got `req.db` object of Mongodb database in every request handler.
 
 ## API
 
-#### express-mongo-db(mongodb, [options])
+### expressMongoDb(uri, [options])
 
-Creates middleware with passed mongodb module instance (this is useful for promisification).
+#### uri
 
-## Options
+*Required*  
+Type: `string`
 
- * All options from [`mongodb-uri`](https://github.com/mongolab/mongodb-uri-node)
- * All options from [`connect-once`](https://github.com/floatdrop/connect-once), such as `reconnectWait` and `heartbeat` function
- * `mongoClient` - object, that passed to [MongoClient.connect](http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#read-preference)
+[Connection string uri](http://docs.mongodb.org/manual/reference/connection-string/).
 
-For example:
+#### options
 
-```javascript
-var mongodb = require('express-mongo-db');
+All options from [MongoClient](http://mongodb.github.io/node-mongodb-native/2.0/api/MongoClient.html) are accepted as well.
 
-var app = require('express')();
-app.use(mongodb(require('mongodb'), {
-    hosts: [{host: 'localhost', port: 31337}],
-    username: 'root',
-    password: 'wat',
-    mongoClient: {
-        slaveOk: true
-    }
-}));
+##### property
 
-app.get('/', function(req, res) {
-    req.db.find(/* ... */);
-});
-```
+Type: `String`  
+Default: `db`
 
-## Events
+Property on `request` object in which db connection will be stored.
 
-To know what's up in your life, we provide event-emitter to listen to. For example - this is how you know, that reconnecton happening:
 
-```javascript
-var mongodb = require('express-mongo-db')(require('mongodb'), options);
-mongodb.connection.on('reconnect', function(err) {
-    console.log("Reconnecting to mongo (" + this.retries + " retries left). " + (err.stack ? err.stack : err));
-});
-```
+## License
 
-Also you can subscribe on connection event:
-
-```javascript
-var mongodb = require('express-mongo-db')(require('mongodb'), options);
-mongodb.connection.when('available', function(err, db) {
-
-});
-```
-
-`express-mongo-db` will start attempts to connect straight after require.
-
-[travis-url]: http://travis-ci.org/floatdrop/express-mongo-db
-[travis-image]: https://travis-ci.org/floatdrop/express-mongo-db.svg?branch=master&style=flat
-
-[coveralls-url]: https://coveralls.io/r/floatdrop/express-mongo-db
-[coveralls-image]: https://coveralls.io/repos/floatdrop/express-mongo-db/badge.svg?style=flat
+MIT © [Vsevolod Strukchinsky](http://github.com/floatdrop)

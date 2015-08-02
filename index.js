@@ -1,39 +1,26 @@
 'use strict';
 
-var connectOnce = require('connect-once');
-var mongodbUri  = require('mongodb-uri');
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var objectAssign = require('object-assign');
 
-module.exports = function (mongodb, options) {
-    options = options || {};
+module.exports = function (uri, opts) {
+	if (typeof uri !== 'string') {
+		throw new TypeError('Expected uri to be a string');
+	}
 
-    var uri = {
-        hosts: options.hosts || [{ host: '127.0.0.1', port: 27017}],
-        database: options.database || 'test',
-        scheme: options.scheme,
-        username: options.username,
-        password: options.password,
-        options: options.options
-    };
+	opts = objectAssign({
+		property: 'db'
+	}, opts);
 
-    var MongoClient = mongodb.MongoClient;
-    var connection = new connectOnce(
-        options,
-        MongoClient.connect,
-        mongodbUri.format(uri),
-        options.mongoClient
-    );
+	var connection = MongoClient.connect(uri, opts);
 
-    var f = function (req, res, next) {
-        connection.when('available', function (err, db) {
-            if (err) {
-                return next(err);
-            }
-            req.db = db;
-            next();
-        });
-    };
-
-    f.connection = connection;
-
-    return f;
+	return function (req, res, next) {
+		connection
+			.then(function (db) {
+				req[opts.property] = db;
+				next();
+			})
+			.catch(next);
+	};
 };
