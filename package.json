@@ -24,8 +24,7 @@
     "express"
   ],
   "dependencies": {
-    "mongodb": "^2.0.39",
-    "object-assign": "^3.0.0"
+    "mongodb": "^2.0.39"
   },
   "devDependencies": {
     "eslint": "^1.0.0",
