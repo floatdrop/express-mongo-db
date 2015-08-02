@@ -13,9 +13,14 @@ $ npm install --save express-mongo-db
 ## Usage
 
 ```js
-var expressMongoDb = require('express-mongo-db');
+var app = require('express')();
 
+var expressMongoDb = require('express-mongo-db');
 app.use(expressMongoDb('mongodb://localhost/test'));
+
+app.get('/', function (req, res, next) {
+	req.db // => Db object
+});
 ```
 
 
