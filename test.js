@@ -19,7 +19,7 @@ test('should connect to mongodb', function (t) {
 	middleware(req, {}, function (err) {
 		t.error(err);
 		t.ok(req.db);
-		t.end();
+		req.db.close(true, t.end);
 	});
 });
 
@@ -32,6 +32,6 @@ test('should connect to mongodb with custom property', function (t) {
 	middleware(req, {}, function (err) {
 		t.error(err);
 		t.ok(req.myDb);
-		t.end();
+		req.myDb.close(true, t.end);
 	});
 });
