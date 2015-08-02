@@ -3,16 +3,27 @@
 var test = require('tap').test;
 var expressMongoDb = require('./');
 
-test('should connect pass error on fail', function (t) {
+test('throws on invalid uri', function (t) {
+	t.throws(function () {
+		expressMongoDb();
+	}, /Expected uri to be a string/);
+	t.end();
+});
+
+test('middleware pass error on fail', function (t) {
 	var middleware = expressMongoDb('mongodb://localhost:31337');
 
 	middleware({}, {}, function (err) {
 		t.ok(err);
-		t.end();
+
+		middleware({}, {}, function (err) {
+			t.ok(err);
+			t.end();
+		});
 	});
 });
 
-test('should connect to mongodb', function (t) {
+test('middleware stores connection to mongodb', function (t) {
 	var middleware = expressMongoDb('mongodb://localhost:27017');
 	var req = {};
 
@@ -23,7 +34,7 @@ test('should connect to mongodb', function (t) {
 	});
 });
 
-test('should connect to mongodb with custom property', function (t) {
+test('middleware stores connection in custom property', function (t) {
 	var middleware = expressMongoDb('mongodb://localhost:27017', {
 		property: 'myDb'
 	});
@@ -36,7 +47,7 @@ test('should connect to mongodb with custom property', function (t) {
 	});
 });
 
-test('should return same connection for multiple requests', function (t) {
+test('returns same connection for multiple requests', function (t) {
 	var middleware = expressMongoDb('mongodb://localhost:27017', {
 		property: 'myDb'
 	});
