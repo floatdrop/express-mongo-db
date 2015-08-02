@@ -1,7 +1,6 @@
 'use strict';
 
-var mongodb = require('mongodb');
-var MongoClient = mongodb.MongoClient;
+var MongoClient = require('mongodb').MongoClient;
 
 module.exports = function (uri, opts) {
 	if (typeof uri !== 'string') {
@@ -12,7 +11,7 @@ module.exports = function (uri, opts) {
 
 	var connection = MongoClient.connect(uri, opts);
 
-	return function (req, res, next) {
+	return function expressMongoDb(req, res, next) {
 		connection
 			.then(function (db) {
 				req[opts.property || 'db'] = db;
