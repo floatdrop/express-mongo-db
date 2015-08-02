@@ -35,3 +35,24 @@ test('should connect to mongodb with custom property', function (t) {
 		req.myDb.close(true, t.end);
 	});
 });
+
+test('should return same connection for multiple requests', function (t) {
+	var middleware = expressMongoDb('mongodb://localhost:27017', {
+		property: 'myDb'
+	});
+	var req = {};
+
+	var _db;
+
+	middleware(req, {}, function (err) {
+		t.error(err);
+		t.ok(req.myDb);
+		_db = req.myDb;
+
+		middleware(req, {}, function (err) {
+			t.error(err);
+			t.equal(_db, req.myDb);
+			req.myDb.close(true, t.end);
+		});
+	});
+});
