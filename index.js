@@ -9,14 +9,21 @@ module.exports = function (uri, opts) {
 
 	opts = opts || {};
 
-	var connection = MongoClient.connect(uri, opts);
+	var connection;
 
 	return function expressMongoDb(req, res, next) {
+		if (!connection) {
+			connection = MongoClient.connect(uri, opts);
+		}
+
 		connection
 			.then(function (db) {
 				req[opts.property || 'db'] = db;
 				next();
 			})
-			.catch(next);
+			.catch(function (err) {
+				connection = undefined;
+				next(err);
+			});
 	};
 };
