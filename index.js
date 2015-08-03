@@ -8,6 +8,7 @@ module.exports = function (uri, opts) {
 	}
 
 	opts = opts || {};
+	var property = opts.property || 'db';
 
 	var connection;
 
@@ -18,7 +19,7 @@ module.exports = function (uri, opts) {
 
 		connection
 			.then(function (db) {
-				req[opts.property || 'db'] = db;
+				req[property] = db;
 				next();
 			})
 			.catch(function (err) {
