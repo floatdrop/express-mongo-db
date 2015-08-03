@@ -1,6 +1,6 @@
 {
   "name": "express-mongo-db",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Get db connection in request",
   "license": "MIT",
   "repository": "floatdrop/express-mongo-db",
