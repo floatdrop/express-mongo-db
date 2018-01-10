@@ -9,6 +9,7 @@ module.exports = function (uri, opts) {
 
 	opts = opts || {};
 	var property = opts.property || 'db';
+	delete opts.property;
 
 	var connection;
 
